@@ -5,6 +5,7 @@ import { ArrowRight, FileText } from "lucide-react";
 import useFetchSummaries from "@/hooks/api/use-fetch-summaries";
 import Navbar from "./Navbar";
 import Loading from "./loading";
+import { cards } from "@/lib/constants";
 
 export default function LandingUser() {
   const { data, isLoading } = useFetchSummaries();
@@ -20,10 +21,10 @@ export default function LandingUser() {
             Summarize Documents <br className="hidden md:block" />
             <span className="text-primary">in Seconds with AI</span>
           </h1>
-          {/* <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Upload PDF or DOCX files and get instant, accurate summaries, key
             takeaways, and risk analysis using advanced Gemini AI.
-          </p> */}
+          </p>
           <div className="flex justify-center gap-4">
             <Link href="/upload">
               <Button size="lg" className="gap-2">
@@ -32,22 +33,6 @@ export default function LandingUser() {
             </Link>
           </div>
           <div className="container max-w-7xl mx-auto px-4 pt-4 grid md:grid-cols-3 gap-8">
-            {/* {cards.map(({ title, description, icon, iconBg }, index) => (
-              <div
-                key={index}
-                className="bg-white p-4 rounded-xl shadow-sm border flex items-center gap-4"
-              >
-                <div
-                  className={`shrink-0 w-14 h-14 ${iconBg} rounded-lg flex items-center justify-center`}
-                >
-                  {icon}
-                </div>
-                <div className="text-left">
-                  <h3 className="text-lg font-bold mb-1">{title}</h3>
-                  <p className="text-sm text-gray-600">{description}</p>
-                </div>
-              </div>
-            ))} */}
             {data &&
               data.map(
                 ({
@@ -76,6 +61,23 @@ export default function LandingUser() {
                   </Link>
                 )
               )}
+            {data.length === 0 &&
+              cards.map(({ title, description, icon, iconBg }, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-4 rounded-xl shadow-sm border flex items-center gap-4"
+                >
+                  <div
+                    className={`shrink-0 w-14 h-14 ${iconBg} rounded-lg flex items-center justify-center`}
+                  >
+                    {icon}
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-lg font-bold mb-1">{title}</h3>
+                    <p className="text-sm text-gray-600">{description}</p>
+                  </div>
+                </div>
+              ))}
           </div>
         </section>
       </main>
